@@ -5,7 +5,7 @@ This plugin opens a related test file of a given source file (and viceversa).
 ![Related Test Screenshot](http://example.walterdalmut.com/relatedtest.gif)
 
 When you are editing a source file, eg: `App.php` and you want to open the test file
-you have to issue `tt` and the `AppTest.php` will required from your test folder.
+you have to issue `tt` and the `AppTest.php` will be opened from your tests folder.
 If the test file is missing you can create it on the fly.
 
 ## Examples
