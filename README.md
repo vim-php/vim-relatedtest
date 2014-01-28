@@ -1,6 +1,6 @@
-# Vim plugin to open test spec of a source file
+# Vim plugin to open test spec of a source file and viceversa
 
-This plugin opens a related test file of a given source file.
+This plugin opens a related test file of a given source file (and viceversa).
 
 ![Related Test Screenshot](http://example.walterdalmut.com/relatedtest.gif)
 
@@ -13,6 +13,8 @@ If the test file is missing you can create it on the fly.
 - In PHP if you open `src/Name/App.php` and issue `tt` the plugin tries to open `tests/Name/AppTest.php`
 - In Golang if you open `boat.go` and issue `tt` the plugin tries to open `boat_test.go`
 
+... And viceversa! ;-)
+
 ## Install
 
 You can use Vundle for install this plugin
@@ -20,13 +22,6 @@ You can use Vundle for install this plugin
 ```viml
 Bundle 'wdalmut/vim-relatedtest'
 ```
-
-## Supported languages
-
-Actually only PHP and Golang are supported. You can add a programming language
-through ftplugin dedicated script.
-
-The system works through 2 regular expression substitution base test folders and filename.
 
 ## Your configuration
 
