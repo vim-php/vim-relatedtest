@@ -10,14 +10,14 @@ If the test file is missing you can create it on the fly.
 
 ## Examples
 
-- In PHP if you open src/Name/App.php and issue `tt` the plugin tries to open `tests/Name/AppTest.php`
+- In PHP if you open `src/Name/App.php` and issue `tt` the plugin tries to open `tests/Name/AppTest.php`
 - In Golang if you open `boat.go` and issue `tt` the plugin tries to open `boat_test.go`
 
 ## Install
 
 You can use Vundle for install this plugin
 
-```
+```viml
 Bundle 'wdalmut/vim-relatedtest'
 ```
 
@@ -32,7 +32,7 @@ The system works through 2 regular expression substitution base test folders and
 
 You can redefine shortcuts
 
-```
-g:relatedtest_open_command = '<C-t>'
+```viml
+let g:relatedtest_open_command = '<C-t>'
 ```
 
