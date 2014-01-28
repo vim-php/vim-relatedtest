@@ -8,9 +8,9 @@
 "               Combo for open a related test
 "
 let b:relatedtest_src_folders = [
-    \ 'src',
-    \ 'library',
-    \ 'lib'
+    \ '^src',
+    \ '^library',
+    \ '^lib'
     \ ]
 let b:relatedtest_test_folder = 'tests'
 
