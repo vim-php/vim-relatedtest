@@ -8,8 +8,17 @@
 "               Combo for open a related test
 "
 
-let g:relatedtest_test_folder = ''
-let g:relatedtest_src_folder = ''
+let b:relatedtest_test_folder = ''
+let b:relatedtest_src_folder = ''
 
-let g:relatedtest_file_exp = '\.go$'
-let g:relatedtest_file_sub = '_test\.go'
+let b:relatedtest_file_exp = '\.go$'
+let b:relatedtest_file_sub = '_test\.go'
+
+" Get the fullpath of the test file
+function! b:relatedTestGetTestFileName(actual_file_path)
+     let relatedtest_testfilename = substitute(
+        \ substitute(a:actual_file_path, b:relatedtest_src_folder, b:relatedtest_test_folder, ''),
+        \ b:relatedtest_file_exp, b:relatedtest_file_sub, '')
+
+     return relatedtest_testfilename
+endfunction

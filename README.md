@@ -23,7 +23,7 @@ Bundle 'wdalmut/vim-relatedtest'
 
 ## Supported languages
 
-Actually only PHP and Golang is supported. You can add your programming languages
+Actually only PHP and Golang are supported. You can add a programming language
 through ftplugin dedicated script.
 
 The system works through 2 regular expression substitution base test folders and filename.

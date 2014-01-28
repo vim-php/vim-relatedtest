@@ -16,28 +16,10 @@ if !exists('g:relatedtest_open_command')
     let g:relatedtest_open_command = 'tt'
 endif
 
-if !exists('g:relatedtest_src_folder')
-    let g:relatedtest_src_folder = 'src'
-endif
-
-if !exists('g:relatedtest_test_folder')
-    let g:relatedtest_test_folder = 'tests'
-endif
-
-if !exists('g:relatedtest_file_exp')
-    let g:relatedtest_file_exp = '\.php$'
-endif
-
-if !exists('g:relatedtest_file_sub')
-    let g:relatedtest_file_sub = 'Test\.php'
-endif
-
 function! g:relatedTestOpenTestFile()
-     let relatedtest_testfilename = substitute(
-        \ substitute(bufname('%'), g:relatedtest_src_folder, g:relatedtest_test_folder, ''),
-        \ g:relatedtest_file_exp, g:relatedtest_file_sub, '')
+    let relatedtest_testfilename = b:relatedTestGetTestFileName(bufname('%'))
 
-     if filereadable(relatedtest_testfilename)
+    if filereadable(relatedtest_testfilename)
         exec ":e " . relatedtest_testfilename
     else
         if input("Test file '" . relatedtest_testfilename . "' doesn't exists. Create a new test file [Y/N]? ", 'Y') == 'Y'
