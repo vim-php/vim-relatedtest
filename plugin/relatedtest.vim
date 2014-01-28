@@ -16,17 +16,22 @@ if !exists('g:relatedtest_open_command')
     let g:relatedtest_open_command = 'tt'
 endif
 
-function! g:relatedTestOpenTestFile()
-    let relatedtest_testfilename = b:relatedTestGetTestFileName(bufname('%'))
-
-    if filereadable(relatedtest_testfilename)
-        exec ":e " . relatedtest_testfilename
+function! g:relatedTestHandleTT()
+    let a:bufname = bufname('%')
+    if b:relatedTestIsTest(a:bufname) > 0
+        let relatedtest_filename = b:relatedTestGetFileName(a:bufname)
     else
-        if input("Test file '" . relatedtest_testfilename . "' doesn't exists. Create a new test file [Y/N]? ", 'Y') == 'Y'
-            exec ":e " . relatedtest_testfilename
+        let relatedtest_filename = b:relatedTestGetTestFileName(a:bufname)
+    endif
+
+    if filereadable(relatedtest_filename)
+        exec ":e " . relatedtest_filename
+    else
+        if input("Test file '" . relatedtest_filename . "' doesn't exists. Create a new test file [Y/N]? ", 'Y') == 'Y'
+            exec ":e " . relatedtest_filename
         endif
     endif
 endfunction
 
-exec "nmap <silent> " . g:relatedtest_open_command . " :call g:relatedTestOpenTestFile()<CR>"
+exec "nmap <silent> " . g:relatedtest_open_command . " :call g:relatedTestHandleTT()<CR>"
 
