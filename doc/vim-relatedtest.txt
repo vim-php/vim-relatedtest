@@ -1,0 +1,69 @@
+*vim-relatedtest.txt* Open related testcase of a source file and vice-versa.
+*vim-relatedtest*
+*relatedtest*
+
+__________       .__          __             .______________              __~
+\______   \ ____ |  | _____ _/  |_  ____   __| _/\__    ___/___   _______/  |_~
+ |       _// __ \|  | \__  \\   __\/ __ \ / __ |   |    |_/ __ \ /  ___/\   __\~
+ |    |   \  ___/|  |__/ __ \|  | \  ___// /_/ |   |    |\  ___/ \___ \  |  |~
+ |____|_  /\___  >____(____  /__|  \___  >____ |   |____| \___  >____  > |__|~
+        \/     \/          \/          \/     \/              \/     \/~
+
+                            Reference Manual~
+
+===============================================================================
+CONTENTS                                                  *RelatedTestContents*
+
+    1.Introduction..................................|RelatedTestIntroduction|
+    2.Usage.........................................|RelatedTestUsage|
+    3.Mappings......................................|RelatedTestMappings|
+    4.License.......................................|RelatedTestLicense|
+    6.Contributing..................................|RelatedTestContributing|
+    8.Credits.......................................|RelatedTestCredits|
+
+===============================================================================
+Section 1: Introduction                               *RelatedTestIntroduction*
+
+This plugin will open a related testcase of a source file and vice-versa.
+
+When you issue `tt` on a source file, the testcase will be opened. In case
+it is missing the plugin ask if you want to create a blank testcase file.
+The same things append if you open a testcase and want to switch to its
+related source file.
+
+==============================================================================
+Section 2: Usage                                            *RelatedTestUsage*
+
+When you are on a testcase just press `tt` in normal mode to open the
+testcase
+
+==============================================================================
+Section 3: Mappings                                      *RelatedTestMappings*
+
+You can override the default mapping in your `.vimrc` configuration file >
+    let g:relatedtest_open_command = '<C-t>'
+<
+
+==============================================================================
+Section 4: License                                        *RelatedTestLicense*
+
+This plugin is released under MIT license
+
+See: http://opensource.org/licenses/MIT
+
+=============================================================================
+Section 5: Contributing                             *RelatedTestContributing*
+
+You can find the source of this plugin on Github. Just fork it, open a new
+feature branch and open a Pull Request!
+
+https://github.com/wdalmut/vim-relatedtest
+
+============================================================================
+Section 6: Credits                                      *RelatedTestCredits*
+
+This plugin is created by Walter Dal Mut (walter.dalmut AT gmail DOT com)
+
+You can contact me via email whenever you want
+
+
