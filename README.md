@@ -12,6 +12,7 @@ If the test file is missing you can create it on the fly.
 
 - In PHP if you open `src/Name/App.php` and issue `tt` the plugin tries to open `tests/Name/AppTest.php`
 - In Golang if you open `boat.go` and issue `tt` the plugin tries to open `boat_test.go`
+- In Java if you open the class AppController.java under the package com.mycompany.App and issue ``tt`` the plugin tries to open the class `AppControllerTest.java` under the same package
 
 ... And viceversa! ;-)
 
