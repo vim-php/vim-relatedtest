@@ -16,6 +16,23 @@ if !exists('g:relatedtest_open_command')
     let g:relatedtest_open_command = 'tt'
 endif
 
+let available_extensions = [
+    \ '\.php$',
+    \ '\.go$',
+    \ '\.java$'
+    \ ]
+
+let is_available = 0
+for pattern in available_extensions
+    if bufname('%') =~ pattern
+        let is_available = 1
+    endif
+endfor
+
+if is_available == 0
+    finish
+endif
+
 function! g:relatedTestHandleTT()
     let a:bufname = bufname('%')
     if b:relatedTestIsTest(a:bufname) > 0
