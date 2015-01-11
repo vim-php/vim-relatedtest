@@ -1,5 +1,7 @@
 # Vim plugin to open test spec of a source file and viceversa
 
+**THIS PLUGIN IS NO LONGER WORKING with vim patch 7.4.260**
+
 This plugin opens a related test file of a given source file (and viceversa).
 
 ![Related Test Screenshot](http://example.walterdalmut.com/relatedtest.gif)
