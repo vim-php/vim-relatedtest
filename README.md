@@ -33,3 +33,16 @@ You can redefine shortcuts
 let g:relatedtest_open_command = '<C-t>'
 ```
 
+## PHP Filetype configuration
+
+Sometimes you need to set up where sources and tests folders are located, for doing
+that you can set in your `.exrc` file for your project.
+
+For example for Symfony2 application you can limit the search operation in your
+`src` folder only...
+
+```vim
+let g:relatedtest_php_src="src/"
+let g:relatedtest_php_tests="src/"
+```
+

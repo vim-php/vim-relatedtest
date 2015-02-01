@@ -7,50 +7,55 @@
 "           let g.realted_test_open_trigger = tt [default tt]
 "               Combo for open a related test
 "
-let b:relatedtest_src_regexp = [
-    \ '^src',
-    \ '^library',
-    \ '^lib'
-    \ ]
-let b:relatedtest_src_folders = [
-    \ 'src',
-    \ 'library',
-    \ 'lib'
-    \ ]
 
-let b:relatedtest_test_folder = 'tests'
+let b:relatedtest_file_sub = 'Test.php'
+let b:relatedtest_source_sub = '.php'
 
-let b:relatedtest_file_exp = '\.php$'
-let b:relatedtest_file_sub = 'Test\.php'
-
-let b:relatedtest_source_sub = '\.php'
 let b:relatedtest_test_regexp = 'Test\.php$'
+
+" allow source path overwrite
+if !exists('g:relatedtest_php_src')
+    let g:relatedtest_php_src=""
+endif
+
+" allow test path overwrite
+if !exists('g:relatedtest_php_tests')
+    let g:relatedtest_php_tests=""
+endif
 
 function! b:relatedTestIsTest(actual_file_path)
     return strlen(matchstr(a:actual_file_path, b:relatedtest_test_regexp))
 endfunction
 
+" Get the fullpath of the implementation file
 function! b:relatedTestGetFileName(actual_file_path)
-    for possible_dir in b:relatedtest_src_folders
-        if isdirectory(possible_dir)
-            return substitute(
-                \ substitute(a:actual_file_path, b:relatedtest_test_folder, possible_dir, ""),
-                \ b:relatedtest_test_regexp, b:relatedtest_source_sub, "")
+    let current_filename = substitute(expand('%:t'), b:relatedtest_file_sub, '', '')
 
-        endif
-    endfor
+    let deducedImplementationFilePath = b:relatedTestDeduceImplementationPath(current_filename)
+    let deducedImplementationPath = fnamemodify(deducedImplementationFilePath, ':p:h')
+    return deducedImplementationPath . '/' . current_filename . b:relatedtest_source_sub
 endfunction
 
 " Get the fullpath of the test file
 function! b:relatedTestGetTestFileName(actual_file_path)
-    let l:relatedtest_src = a:actual_file_path
-    for source_folder in b:relatedtest_src_regexp
-        let l:relatedtest_src =
-            \ substitute(l:relatedtest_src, source_folder, b:relatedtest_test_folder, '')
-    endfor
+    let current_filename = substitute(expand('%:t'), b:relatedtest_source_sub, '', '')
 
-    let relatedtest_testfilename =
-        \ substitute(l:relatedtest_src, b:relatedtest_file_exp, b:relatedtest_file_sub, '')
-
-    return relatedtest_testfilename
+    let deducedTestFilePath = b:relatedTestDeduceTestsPath(current_filename)
+    let deducedTestPath = fnamemodify(deducedTestFilePath, ':p:h')
+    return deducedTestPath . '/' . current_filename . b:relatedtest_file_sub
 endfunction
+
+" Try to deduce the tests path of a package
+function! b:relatedTestDeduceTestsPath(package)
+    execute 'vimgrep /' . a:package . '/gj '.g:relatedtest_php_tests.'**/*' . b:relatedtest_file_sub
+    let quickfixlist = getqflist()
+    return bufname(quickfixlist[0].bufnr)
+endfunction
+
+" Try to deduce the implementation path of a package
+function! b:relatedTestDeduceImplementationPath(package)
+    execute 'vimgrep /' . a:package . '/gj '.g:relatedtest_php_src.'**/*' . b:relatedtest_source_sub
+    let quickfixlist = getqflist()
+    return bufname(quickfixlist[0].bufnr)
+endfunction
+
