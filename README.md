@@ -46,3 +46,10 @@ let g:relatedtest_php_src="src/"
 let g:relatedtest_php_tests="src/"
 ```
 
+In order to exclude always a particular folder like: `vendor` you can use
+wildignore flag directly in your `.vimrc` configuration file.
+
+```vim
+:set wildignore+=**/vendor/**
+```
+
