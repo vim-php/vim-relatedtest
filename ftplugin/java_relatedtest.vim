@@ -23,7 +23,7 @@ function! RelatedTestGetFileName(actual_file_path)
     let currentfile_name = substitute(expand('%:t'), b:relatedtest_file_sub, '', '')
     let package_line = search('package')
     let package = getline(package_line)
-    let deducedImplementationFilePath = RelatedTestDeduceImplementationPath(package)
+    let deducedImplementationFilePath = s:RelatedTestDeduceImplementationPath(package)
     let deducedImplementationPath = fnamemodify(deducedImplementationFilePath, ':p:h')
     return deducedImplementationPath . '/' . currentfile_name . b:relatedtest_source_sub
 endfunction
@@ -33,20 +33,20 @@ function! RelatedTestGetTestFileName(actual_file_path)
     let currentfile_name = substitute(expand('%:t'), b:relatedtest_source_sub, '', '')
     let package_line = search('package')
     let package = getline(package_line)
-    let deducedTestFilePath = RelatedTestDeduceTestsPath(package)
+    let deducedTestFilePath = s:RelatedTestDeduceTestsPath(package)
     let deducedTestPath = fnamemodify(deducedTestFilePath, ':p:h')
     return deducedTestPath . '/' . currentfile_name . b:relatedtest_file_sub
 endfunction
 
 " Try to deduce the tests path of a package
-function! RelatedTestDeduceTestsPath(package)
+function! s:RelatedTestDeduceTestsPath(package)
     execute 'vimgrep /' . a:package . '/gj **/*' . b:relatedtest_file_sub
     let quickfixlist = getqflist()
     return bufname(quickfixlist[0].bufnr)
 endfunction
 
 " Try to deduce the implementation path of a package
-function! RelatedTestDeduceImplementationPath(package)
+function! s:RelatedTestDeduceImplementationPath(package)
     execute 'vimgrep /' . a:package . '/gj **/*' . b:relatedtest_source_sub
     let quickfixlist = getqflist()
     return bufname(quickfixlist[0].bufnr)
