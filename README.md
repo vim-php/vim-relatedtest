@@ -53,3 +53,17 @@ wildignore flag directly in your `.vimrc` configuration file.
 :set wildignore+=**/vendor/**
 ```
 
+## Open Strategy
+
+The open strategy comes in help when you want to open the related test
+in a new window, split, tab etc..
+
+```viml
+let g:relatedtest_open_strategy = 'vsp'
+```
+
+You can use any vim command as open strategy, the most common are:
+- vsp (open in a vertical split)
+- sp (open in an horizontal split)
+- tabnew (open in a tab)
+- e (open in the current window)

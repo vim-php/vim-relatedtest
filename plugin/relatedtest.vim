@@ -16,4 +16,8 @@ if !exists('g:relatedtest_open_command')
     let g:relatedtest_open_command = 'tt'
 endif
 
+if !exists('g:relatedtest_open_strategy')
+    let g:relatedtest_open_strategy = 'e'
+endif
+
 exec "nmap <silent> " . g:relatedtest_open_command . " :call relatedtest#handleTT()<CR>"

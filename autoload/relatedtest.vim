@@ -22,18 +22,18 @@ function! s:GetInputResponse(prompt, inputChoices)
 endfunction
 
 function! relatedtest#handleTT()
-    let a:bufname = bufname('%')
-    if RelatedTestIsTest(a:bufname) > 0
-        let relatedtest_filename = RelatedTestGetFileName(a:bufname)
+    let bufname = bufname('%')
+    if RelatedTestIsTest(bufname) > 0
+        let relatedtest_filename = RelatedTestGetFileName(bufname)
     else
-        let relatedtest_filename = RelatedTestGetTestFileName(a:bufname)
+        let relatedtest_filename = RelatedTestGetTestFileName(bufname)
     endif
-
+    let open_strategy = ":" . g:relatedtest_open_strategy . " "
     if filereadable(relatedtest_filename)
-        exec ":e " . relatedtest_filename
+        exec open_strategy . relatedtest_filename
     else
         if s:GetInputResponse("Test file '" . relatedtest_filename . "' doesn't exists. Create a new test file (y/n)?", ['y', 'n']) == 'y'
-            exec ":e " . relatedtest_filename
+            exec open_strategy . relatedtest_filename
         endif
     endif
 endfunction

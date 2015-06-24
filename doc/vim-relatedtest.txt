@@ -42,6 +42,7 @@ Section 3: Mappings                                      *RelatedTestMappings*
 
 You can override the default mapping in your `.vimrc` configuration file >
     let g:relatedtest_open_command = '<C-t>'
+    let g:relatedtest_open_strategy = 'vsp'
 <
 
 ==============================================================================
