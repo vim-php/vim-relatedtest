@@ -23,37 +23,37 @@ if !exists('g:relatedtest_php_tests')
     let g:relatedtest_php_tests=""
 endif
 
-function! b:relatedTestIsTest(actual_file_path)
+function! RelatedTestIsTest(actual_file_path)
     return strlen(matchstr(a:actual_file_path, b:relatedtest_test_regexp))
 endfunction
 
 " Get the fullpath of the implementation file
-function! b:relatedTestGetFileName(actual_file_path)
+function! RelatedTestGetFileName(actual_file_path)
     let current_filename = substitute(expand('%:t'), b:relatedtest_file_sub, '', '')
 
-    let deducedImplementationFilePath = b:relatedTestDeduceImplementationPath(current_filename)
+    let deducedImplementationFilePath = s:RelatedTestDeduceImplementationPath(current_filename)
     let deducedImplementationPath = fnamemodify(deducedImplementationFilePath, ':p:h')
     return deducedImplementationPath . '/' . current_filename . b:relatedtest_source_sub
 endfunction
 
 " Get the fullpath of the test file
-function! b:relatedTestGetTestFileName(actual_file_path)
+function! RelatedTestGetTestFileName(actual_file_path)
     let current_filename = substitute(expand('%:t'), b:relatedtest_source_sub, '', '')
 
-    let deducedTestFilePath = b:relatedTestDeduceTestsPath(current_filename)
+    let deducedTestFilePath = s:RelatedTestDeduceTestsPath(current_filename)
     let deducedTestPath = fnamemodify(deducedTestFilePath, ':p:h')
     return deducedTestPath . '/' . current_filename . b:relatedtest_file_sub
 endfunction
 
 " Try to deduce the tests path of a package
-function! b:relatedTestDeduceTestsPath(package)
+function! s:RelatedTestDeduceTestsPath(package)
     execute 'vimgrep /' . a:package . '/gj '.g:relatedtest_php_tests.'**/*' . b:relatedtest_file_sub
     let quickfixlist = getqflist()
     return bufname(quickfixlist[0].bufnr)
 endfunction
 
 " Try to deduce the implementation path of a package
-function! b:relatedTestDeduceImplementationPath(package)
+function! s:RelatedTestDeduceImplementationPath(package)
     execute 'vimgrep /' . a:package . '/gj '.g:relatedtest_php_src.'**/*' . b:relatedtest_source_sub
     let quickfixlist = getqflist()
     return bufname(quickfixlist[0].bufnr)
